@@ -15,11 +15,14 @@ import AddMovieReviewPage from './pages/addMovieReviewPage'
 import TopRatedMoviesPage from "./pages/topRatedMoviesPage";
 import CurrentPopularMoviesPage from "./pages/currentPopularMoviesPage";
 import PeoplePage from "./pages/peoplePage"
+import AuthContextProvider from "./contexts/authContext";
 import PeopleDetailPage from "./pages/peopleDetailPage";
+import SignUpPage from "./pages/signUpPage";
 const MoviePage = lazy(() => import("./pages/movieDetailsPage"));
 const FavoriteMoviesPage = lazy(() => import("./pages/favoriteMoviesPage"));
 const UpcomingMoviePage = lazy(() => import("./pages/upcomingMoviesPage"));
 const MovieReviewPage = lazy(() => import("./pages/movieReviewPage"));
+
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -35,6 +38,7 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
+      <AuthContextProvider>
         <SiteHeader />
         <MoviesContextProvider>
         <Suspense fallback={<div>Loading...</div>}>
@@ -51,9 +55,11 @@ const App = () => {
           <Route path="/movies/currentPopular" element={<CurrentPopularMoviesPage />} />
           <Route path="/movies/people" element= {<PeoplePage/>}/>
           <Route path="/people/:id" element= {<PeopleDetailPage/>}/> 
+          <Route path="/signup" element={ <SignUpPage /> } />
         </Routes>
         </Suspense>
         </MoviesContextProvider>
+        </AuthContextProvider>
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>

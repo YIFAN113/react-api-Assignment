@@ -1,109 +1,43 @@
-import React, { useState } from 'react';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebase/firebaseApp'; 
-import { useNavigate } from 'react-router-dom';
-// import '../css/loginPage.css';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import CssBaseline from '@mui/material/CssBaseline';
+import React, { useContext, useState } from "react";
+import { Navigate, useLocation } from "react-router-dom";
+import { AuthContext } from '../contexts/authContext';
+import { Link } from "react-router-dom";
 
-const LoginPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+const LoginPage = props => {
+    const context = useContext(AuthContext);
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      alert("Login successful!");
-      navigate('/'); // Redirect to home page after login
-    } catch (error) {
-      console.error(error.message);
-      console.log("Login failed")
-      alert("Login failed");
+    const [userName, setUserName] = useState("");
+    const [password, setPassword] = useState("");
+
+    const login = () => {
+        context.authenticate(userName, password);
+    };
+
+    let location = useLocation();
+
+    // Set 'from' to path where browser is redirected after a successful login - either / or the protected path user requested
+    const { from } = location.state ? { from: location.state.from.pathname } : { from: "/" };
+
+    if (context.isAuthenticated === true) {
+        return <Navigate to={from} />;
     }
-  };
 
-  const handleSignUp = async (e) => {
-    e.preventDefault();
-    try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      alert("Registration successful!");
-      navigate('/'); // Redirect to home page after registration
-    } catch (error) {
-      console.error(error.message);
-      console.log("Sign up failed")
-      alert("Registration failed");
-    }
-  };
-
-  return (
-    <Container component="main" maxWidth="xs" sx={{ bgcolor: 'grey.400'}}>
-      <CssBaseline />
-      <Box
-        sx={{
-          marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <Typography component="h1" variant="h5">
-          Login / Sign Up
-        </Typography>
-        <Box component="form" noValidate onSubmit={handleLogin} sx={{ mt: 1 }}>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Login
-          </Button>
-          <Button
-            fullWidth
-            variant="outlined"
-            color="primary"
-            sx={{ mt: 3, mb: 2 }}
-            onClick={handleSignUp}
-          >
-            Sign Up
-          </Button>
-        </Box>
-      </Box>
-    </Container>
-  );
+    return (
+        <>
+            <h2>Login page</h2>
+            <p>You must log in to view the protected pages </p>
+            <input id="username" placeholder="user name" onChange={e => {
+                setUserName(e.target.value);
+            }}></input><br />
+            <input id="password" type="password" placeholder="password" onChange={e => {
+                setPassword(e.target.value);
+            }}></input><br />
+            {/* Login web form  */}
+            <button onClick={login}>Log in</button>
+            <p>Not Registered?
+                <Link to="/signup">Sign Up!</Link></p>
+        </>
+    );
 };
 
 export default LoginPage;

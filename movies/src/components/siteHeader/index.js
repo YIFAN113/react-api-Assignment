@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -11,13 +11,13 @@ import { useNavigate } from "react-router-dom";
 import { styled } from '@mui/material/styles';
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-
+import { AuthContext } from "../../contexts/authContext";
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
 const SiteHeader = ({ history }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-
+  const { userName } = useContext(AuthContext);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   
@@ -41,6 +41,8 @@ const SiteHeader = ({ history }) => {
     setAnchorEl(event.currentTarget);
   };
 
+ 
+
   return (
     <>
       <AppBar position="fixed" color="secondary">
@@ -48,6 +50,11 @@ const SiteHeader = ({ history }) => {
           <Typography variant="h4" sx={{ flexGrow: 1 }}>
             TMDB Client
           </Typography>
+          {userName && (
+            <Typography variant="h6" sx={{ flexGrow: 0 }}>
+              Welcome, {userName}
+            </Typography>
+          )}
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
             All you ever wanted to know about Movies!
           </Typography>
