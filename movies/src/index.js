@@ -18,6 +18,7 @@ import PeoplePage from "./pages/peoplePage"
 import AuthContextProvider from "./contexts/authContext";
 import PeopleDetailPage from "./pages/peopleDetailPage";
 import SignUpPage from "./pages/signUpPage";
+import ProtectedRoutes from "./protectedRoutes";
 const MoviePage = lazy(() => import("./pages/movieDetailsPage"));
 const FavoriteMoviesPage = lazy(() => import("./pages/favoriteMoviesPage"));
 const UpcomingMoviePage = lazy(() => import("./pages/upcomingMoviesPage"));
@@ -44,7 +45,7 @@ const App = () => {
         <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
-           <Route path="/movies/upcoming" element={<UpcomingMoviePage />} /> 
+          
           <Route path="/reviews/:id" element={ <MovieReviewPage /> } />
           <Route path="/movies/:id" element={<MoviePage />} />
           <Route path="/:page" element={<HomePage />} />
@@ -56,6 +57,9 @@ const App = () => {
           <Route path="/movies/people" element= {<PeoplePage/>}/>
           <Route path="/people/:id" element= {<PeopleDetailPage/>}/> 
           <Route path="/signup" element={ <SignUpPage /> } />
+          <Route element={<ProtectedRoutes />}>
+          <Route path="/movies/upcoming" element={<UpcomingMoviePage />} /> 
+          </Route>
         </Routes>
         </Suspense>
         </MoviesContextProvider>

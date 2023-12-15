@@ -1,3 +1,4 @@
+
 export const getMovies = (args) => {
   //const [page] = args.queryKey;
   const[,pages] = args.queryKey;
@@ -78,8 +79,14 @@ export const getMovie = (args) => {
 
   export const getUpcomingMovies = () => {
     return fetch(
-        `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
-    ).then( (response) => {
+       // `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
+`http://localhost:8080/api/movies/tmdb/upcoming`, {
+  headers: {
+    'Authorization': window.localStorage.getItem('token')
+  }
+}
+    )
+    .then( (response) => {
         if (!response.ok) {
             throw new Error(response.json().message);
         }
