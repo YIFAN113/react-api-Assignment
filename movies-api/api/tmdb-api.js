@@ -69,6 +69,37 @@ export const getGenres = async () => {
         return response.json();
     })
     .catch((error) => {
-        throw error
+        throw error;
     });
   }; 
+
+  export const getMovie = (args) => {
+    // console.log(args)
+    // const [, idPart] = args.queryKey;
+    // const { id } = idPart;
+    return fetch(
+            `https://api.themoviedb.org/3/movie/${args}?api_key=${process.env.TMDB_KEY}`
+        ).then((response) => {
+            if (!response.ok) {
+                throw new Error(response.json().message);
+            }
+            return response.json();
+        })
+        .catch((error) => {
+            throw error;
+        });
+};
+  
+  export const getMovieImages = (args) => {
+    return fetch(
+            `https://api.themoviedb.org/3/movie/${args}/images?api_key=${process.env.TMDB_KEY}`
+        ).then((response) => {
+            if (!response.ok) {
+                throw new Error(response.json().message);
+            }
+            return response.json();
+        })
+        .catch((error) => {
+            throw error
+        });
+};
