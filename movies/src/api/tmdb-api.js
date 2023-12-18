@@ -216,3 +216,13 @@ export const signup = async (username, password) => {
     });
     return response.json();
 };
+
+export const writeReview = (review) => {
+  return fetch('/api/reviews', {
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      method: 'post',
+      body: JSON.stringify({ review: review })
+  }).then(res => res.json())
+};
