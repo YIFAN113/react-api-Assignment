@@ -7,6 +7,7 @@ import defaultErrHandler from './errHandler';
 import moviesRouter from './api/movies';
 import authenticate from './authenticate';
 
+
 dotenv.config();
 
 const app = express();

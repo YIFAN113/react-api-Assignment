@@ -51,9 +51,11 @@ router.get('/tmdb/topRated', asyncHandler(async (req, res) => {
     const topRatedMovies = await api.getTopRatedMovies();
     res.status(200).json(topRatedMovies);
 }));
-router.get('/tmdb/movieReviews', asyncHandler(async (req, res) => {
-    const reviews = await api.getMovieReviews();
-    res.status(200).json(reviews);
+router.get('/tmdb/movie/:id/reviews', asyncHandler(async(req, res) => {
+    const id = req.params.id;
+
+    const result = await api.getMovieReviews(id);
+    res.status(200).json(result);
 }));
 
 router.get('/tmdb/currentPopular', asyncHandler(async (req, res) => {
