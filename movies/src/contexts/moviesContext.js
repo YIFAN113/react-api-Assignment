@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import {writeReview} from "../api/tmdb-api"
 export const MoviesContext = React.createContext(null);
 
 const MoviesContextProvider = (props) => {
@@ -20,6 +20,7 @@ const MoviesContextProvider = (props) => {
   const [myReviews, setMyReviews] = useState( {} ) 
   const addReview = (movie, review) => {
     setMyReviews( {...myReviews, [movie.id]: review } )
+    writeReview(review);
   };
   console.log(myReviews);
 
