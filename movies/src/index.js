@@ -44,20 +44,16 @@ const App = () => {
         <MoviesContextProvider>
         <Suspense fallback={<div>Loading...</div>}>
         <Routes>
-          <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
-          
-          
-          
           <Route path="/:page" element={<HomePage />} />
           <Route path="*" element={ <Navigate to="/1" /> } />
           <Route path="/reviews/form" element={ <AddMovieReviewPage /> } />
           <Route path="/reviews/:id" element={ <MovieReviewPage /> } />
-          <Route path="/login" element={<LoginPage />} />
-          
-          <Route path="/movies/people" element= {<PeoplePage/>}/>
+          <Route path="/login" element={<LoginPage />} />         
           <Route path="/people/:id" element= {<PeopleDetailPage/>}/> 
           <Route path="/signup" element={ <SignUpPage /> } />
           <Route element={<ProtectedRoutes />}>
+          <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
+          <Route path="/movies/people" element= {<PeoplePage/>}/>
           <Route path="/movies/:id" element={<MoviePage />} />
           <Route path="/movies/currentPopular" element={<CurrentPopularMoviesPage />} />
           <Route path="/movies/upcoming" element={<UpcomingMoviePage />} /> 
