@@ -1,15 +1,17 @@
 # Assignment 2 - Web API.
 
-Name: Your Name
+Name: Yifan Gu
 
 ## Features.
 
 A bullet-point list of the ADDITIONAL features you have implemented in the API **THAT WERE NOT IN THE LABS** (or modifications to existing features)
  
- + Feature 1 
- + Feature 2 
- + Feature 3 
- + etc
+ + User Authentication
+ + The username for logging in is displayed on the site header
+ + Use regular expressions to standardize password formatting
+ + Protected routes 
+ + New backend apis 
+ + The front and back ends are almost fully integrated
 
 ## Setup requirements.
 
@@ -31,22 +33,36 @@ secret=YourJWTSecret
 ______________________
 
 ## API Design
-Give an overview of your web API design, perhaps similar to the following: 
 
-- /api/movies | GET | Gets a list of movies 
-- /api/movies/{movieid} | GET | Gets a single movie 
-- /api/movies/{movieid}/reviews | GET | Get all reviews for movie 
-- /api/movies/{movieid}/reviews | POST | Create a new review for Movie 
-
-If you have your API design on an online platform or graphic, please link to it (e.g. [Swaggerhub](https://app.swaggerhub.com/)).
+- /api/movies/tmdb/movie/{movieid}         |GET| Get movie detail
+- /api/movies/tmdb/movie/{movieid}/reviews |GET| Get movie reviews 
+- /api/movies/tmdb/upcoming                |GET| Get upcoming movie list 
+- /api/movies/tmdb/genre                   |GET| Get movie genre
+- /api/movies/tmdb/topRated                |GET| Get toprated movie list
+- /api/movies/tmdb/currentPopular          |GET| Get current popular movie list
+- /api/movies/tmdb/movie/{movieid}/images  |GET| Get movie images
+- /api/riviews                             |POST| Upload movie review
+- /api/people/tmdb/popular                 |GET| Get popular people list
+- /api/people/tmdb/people/{peopleid}       |GET| Get people detail
+- /api/people/tmdb/people/{peopleid}       |GET| Get people images
+- /api/users                               |POST| User login
+- /api/users?action=register               |POST| User sign up
 
 ## Security and Authentication
+Protected rotes:
+/movies/favorites
+/movies/people
+/movies/:id
+/movies/currentPopular
+/movies/upcoming
+/movies/top_Rated
+  This allows users who are not logged in to only browse the homepage and only when they are logged in to browse all content
+  After the user registers and logs in, the authentication token is stored in the browser and is required to access pages other than the home page.
 
-Give details of authentication/security implemented on the API (e.g. passport/sessions). Indicate which routes are protected.
 
 ## Integrating with React App
 
-Describe how you integrated your React app with the API. List the views that use your Web API instead of the TMDB API. Describe any other updates to the React app from Assignment One.
+I put almost all of the tmdb apis into the backend to separate the front-end and back-end, and the views include currentPopularMoviesPage, MovieDetailsPage, MovieReviewPage, upcomingMoviesPage, topRatedMoviesPage, peoplePage, peopleDetailPage.
 
 ## Independent learning (if relevant)
 
