@@ -151,7 +151,11 @@ export const getCPMovies = () => {
 
 export const getpeople = () => {
   return fetch(
-    `https://api.themoviedb.org/3/person/popular?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
+    `http://localhost:8080/api/people/tmdb/popular`, {
+      headers: {
+        'Authorization': window.localStorage.getItem('token')
+      }
+    }
     ).then((response) => {
       if (!response.ok) {
         throw new Error(response.json().message);
@@ -167,7 +171,11 @@ export const getpeople = () => {
     const [, idPart] = args.queryKey;
     const { id } = idPart;
     return fetch(
-      `https://api.themoviedb.org/3/person/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`
+      `http://localhost:8080/api/people/tmdb/people/${id}`, {
+        headers: {
+          'Authorization': window.localStorage.getItem('token')
+        }
+      }
     ).then((response) => {
       if (!response.ok) {
         throw new Error(response.json().message);
@@ -183,7 +191,11 @@ export const getpeople = () => {
     const [, idPart] = args.queryKey;
     const { id } = idPart;
     return fetch(
-      `https://api.themoviedb.org/3/person/${id}/images?api_key=${process.env.REACT_APP_TMDB_KEY}`
+      `http://localhost:8080/api/people/tmdb/people/${id}/images`, {
+        headers: {
+          'Authorization': window.localStorage.getItem('token')
+        }
+      }
     ).then((response) => {
       if (!response.ok) {
         throw new Error(response.json().message);
