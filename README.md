@@ -3,15 +3,14 @@
 Name: Yifan Gu
 
 ## Features.
-
-A bullet-point list of the ADDITIONAL features you have implemented in the API **THAT WERE NOT IN THE LABS** (or modifications to existing features)
- 
  + User Authentication
  + The username for logging in is displayed on the site header
  + Use regular expressions to standardize password formatting
  + Protected routes 
  + New backend apis 
  + The front and back ends are almost fully integrated
+ + parameterised URL
+ + New mongodb collection(review)
 
 ## Setup requirements.
 
@@ -58,7 +57,8 @@ Protected rotes:
 /movies/top_Rated
   This allows users who are not logged in to only browse the homepage and only when they are logged in to browse all content
   After the user registers and logs in, the authentication token is stored in the browser and is required to access pages other than the home page.
-
+## Video Link
+https://youtu.be/IzwfO1SVYH8
 
 ## Integrating with React App
 
