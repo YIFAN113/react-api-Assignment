@@ -60,6 +60,9 @@ Protected rotes:
 ## Video Link
 https://youtu.be/IzwfO1SVYH8
 
+## Github Link
+https://github.com/YIFAN113/react-api-Assignment
+
 ## Integrating with React App
 
 I put almost all of the tmdb apis into the backend to separate the front-end and back-end, and the views include currentPopularMoviesPage, MovieDetailsPage, MovieReviewPage, upcomingMoviesPage, topRatedMoviesPage, peoplePage, peopleDetailPage.
