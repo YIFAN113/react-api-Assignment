@@ -43,7 +43,7 @@ ______________________
 - /api/riviews                             |POST| Upload movie review
 - /api/people/tmdb/popular                 |GET| Get popular people list
 - /api/people/tmdb/people/{peopleid}       |GET| Get people detail
-- /api/people/tmdb/people/{peopleid}       |GET| Get people images
+- /api/people/tmdb/people/{peopleid}/images|GET| Get people images
 - /api/users                               |POST| User login
 - /api/users?action=register               |POST| User sign up
 
